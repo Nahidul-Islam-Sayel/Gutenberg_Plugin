@@ -1,313 +1,277 @@
+import React from "react";
 import { __ } from "@wordpress/i18n";
 import {
-    useBlockProps,
-    RichText,
-    MediaUpload,
-    BlockControls,
-    InspectorControls,
+	useBlockProps,
+	RichText,
+	MediaUpload,
+	BlockControls,
+	InspectorControls,
 } from "@wordpress/block-editor";
-import { Button, PanelBody, RangeControl, ColorPalette, SelectControl } from "@wordpress/components";
+import {
+	Button,
+	PanelBody,
+	RangeControl,
+	ColorPalette,
+	SelectControl,
+	ToggleControl,
+	__experimentalDivider as Divider,
+	__experimentalToggleGroupControl as ToggleGroupControl,
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
+} from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 import { Toolbar } from "@wordpress/components";
 import "./editor.scss";
+import General from "./Components/General";
+import Content from "./Components/Content";
+import Title from "./Components/Title";
 
-export default function Edit({ attributes, setAttributes }) {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [isEditing, setIsEditing] = useState(false);
-    const [activePanel, setActivePanel] = useState('image');
+export default function Edit({ attributes, setAttributes, isSelected }) {
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const [isEditing, setIsEditing] = useState(false);
+	const [activePanel, setActivePanel] = useState("image");
 
-    const { slides, imageBorderRadius, imageSize, titleColor, titleSize, titleStyle, contentColor, contentSize, contentStyle } = attributes;
+	const {
+		slides,
+		titleColor,
+		titleSize,
+		titleStyle,
+		contentColor,
+		contentSize,
+		contentStyle,
+		settingsPanelState,
+		move,
+		editablePrefix,
+		editableTitle,
+		editableDescription,
+		tabHeadingTagName,
+	} = attributes;
 
-    const blockProps = useBlockProps();
+	const blockProps = useBlockProps();
 
-    useEffect(() => {
-        if (!isEditing) {
-            const timer = setTimeout(() => {
-                setCurrentSlide((currentSlide + 1) % slides.length);
-            }, 5000); 
+	useEffect(() => {
+		if (!isEditing && !isSelected) {
+			const timer = setTimeout(() => {
+				setCurrentSlide((currentSlide + 1) % slides.length);
+			}, 5000);
 
-            return () => clearTimeout(timer);
-        }
-    }, [currentSlide, slides.length, isEditing]);
+			return () => clearTimeout(timer);
+		}
+	}, [currentSlide, slides.length, isEditing, isSelected]);
 
-    const nextSlide = () => {
-        setCurrentSlide((currentSlide + 1) % slides.length);
-    };
+	const nextSlide = () => {
+		setCurrentSlide((currentSlide + 1) % slides.length);
+	};
 
-    const prevSlide = () => {
-        setCurrentSlide((currentSlide - 1 + slides.length) % slides.length);
-    };
+	const prevSlide = () => {
+		setCurrentSlide((currentSlide - 1 + slides.length) % slides.length);
+	};
 
-    const handleEditStart = () => {
-        setIsEditing(true);
-    };
+	const handleEditStart = () => {
+		setIsEditing(true);
+	};
 
-    const handleEditEnd = () => {
-        setIsEditing(false);
-    };
+	const handleEditEnd = () => {
+		setIsEditing(false);
+	};
 
-    const handleSlideChange = (index, key, value) => {
-        const updatedSlides = slides.map((slide, i) => {
-            if (i === index) {
-                return {
-                    ...slide,
-                    [key]: value,
-                };
-            }
-            return slide;
-        });
+	const handleSlideChange = (index, key, value) => {
+		const updatedSlides = slides.map((slide, i) => {
+			if (i === index) {
+				return {
+					...slide,
+					[key]: value,
+				};
+			}
+			return slide;
+		});
 
-        setAttributes({ slides: updatedSlides });
-    };
+		setAttributes({ slides: updatedSlides });
+	};
 
-    const addSlide = () => {
-        const newSlide = {
-            title: "",
-            content: "",
-            imageUrl: "",
-        };
-        setAttributes({ slides: [...slides, newSlide] });
-    };
+	const addSlide = () => {
+		const newSlide = {
+			title: "New Slide",
+			content:
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+			imageUrl: "",
+			prefix: "Image 1"
+		};
+		setAttributes({ slides: [...slides, newSlide] });
+	};
+	console.log(tabHeadingTagName);
 
-    const removeSlide = (indexToRemove) => {
-        const updatedSlides = slides.filter(
-            (slide, index) => index !== indexToRemove
-        );
-        setAttributes({ slides: updatedSlides });
-    };
+	const removeSlide = (indexToRemove) => {
+		const updatedSlides = slides.filter(
+			(slide, index) => index !== indexToRemove,
+		);
+		setAttributes({ slides: updatedSlides });
+		if (indexToRemove === currentSlide && updatedSlides.length > 0) {
+			const newIndex =
+				indexToRemove === updatedSlides.length
+					? indexToRemove - 1
+					: indexToRemove;
+			setCurrentSlide(newIndex);
+		}
+	};
 
-    const removePicture = (indexToRemove) => {
-        const updatedSlides = slides.map((slide, index) => {
-            if (index === indexToRemove) {
-                return { ...slide, imageUrl: "" };
-            }
-            return slide;
-        });
-        setAttributes({ slides: updatedSlides });
-    };
+	const removePicture = (indexToRemove) => {
+		const updatedSlides = slides.map((slide, index) => {
+			if (index === indexToRemove) {
+				return { ...slide, imageUrl: "" };
+			}
+			return slide;
+		});
+		setAttributes({ slides: updatedSlides });
+	};
+	return (
+		<div {...blockProps}>
+			<BlockControls>
+				<Toolbar>
+					<Button icon="plus-alt2" label={__("Add Slide")} onClick={addSlide} />
+					{slides.map((slide, index) => (
+						<React.Fragment key={index}>
+							{index === currentSlide && (
+								<Button
+									icon="dismiss"
+									label={__("Remove Slide")}
+									onClick={() => removeSlide(index)}
+								/>
+							)}
+						</React.Fragment>
+					))}
+					{slides[currentSlide].imageUrl && (
+						<Button
+							icon="trash"
+							label={__("Remove Picture")}
+							onClick={() => removePicture(currentSlide)}
+						/>
+					)}
+				</Toolbar>
+			</BlockControls>
+			<InspectorControls>
+				<PanelBody title={__("Slider Settings Panel", "demo-tabs")}>
+					<ToggleGroupControl
+						onChange={(state) => setAttributes({ settingsPanelState: state })}
+						value={settingsPanelState}
+						isBlock
+					>
+						<ToggleGroupControlOption value="general" label="General" />
+						<ToggleGroupControlOption value="style" label="Style" />
+						<ToggleGroupControlOption value="advanced" label="Advanced" />
+					</ToggleGroupControl>
+					<Divider />
 
-    return (
-        <div {...blockProps}>
-            <BlockControls>
-                <Toolbar>
-                    <Button
-                        icon="plus-alt2"
-                        label={__("Add Slide")}
-                        onClick={addSlide}
-                    />
-                    {slides.map((slide, index) => (
-                        <Button
-                            key={index}
-                            icon="dismiss"
-                            label={__("Remove Slide")}
-                            onClick={() => removeSlide(index)}
-                        />
-                    ))}
-                    <Button
-                        icon="trash"
-                        label={__("Remove Picture")}
-                        onClick={() => removePicture(currentSlide)}
-                    />
-                </Toolbar>
-            </BlockControls>
-            <InspectorControls>
-                <PanelBody title={__("Controls")} initialOpen={true}>
-                    <Button
-                        isPrimary={activePanel === 'image'}
-                        onClick={() => setActivePanel('image')}
-                    >
-                        {__("Image")}
-						
-                    </Button>
-                    <Button
-                        isPrimary={activePanel === 'content'}
-                        onClick={() => setActivePanel('content')}
-                    >
-                        {__("Content Controls")}
-                    </Button>
-                    <Button
-                        isPrimary={activePanel === 'title'}
-                        onClick={() => setActivePanel('title')}
-                    >
-                        {__("Title Controls")}
-                    </Button>
-                </PanelBody>
-                {activePanel === 'image' && (
-                    <PanelBody title={__("Image Controls")} icon="format-image">
-                        <RangeControl
-                            label={__("Border Radius")}
-                            value={imageBorderRadius}
-                            onChange={(value) =>
-                                setAttributes({ imageBorderRadius: value })
-                            }
-                            min={0}
-                            max={50}
-                        />
-                        <RangeControl
-                            label={__("Image Size")}
-                            value={imageSize}
-                            onChange={(value) =>
-                                setAttributes({ imageSize: value })
-                            }
-                            min={100}
-                            max={800}
-                        />
-                        <Button
-                            isDestructive
-                            onClick={() => removePicture(currentSlide)}
-                        >
-                            {__("Remove Picture")}
-                        </Button>
-                    </PanelBody>
-                )}
-                {activePanel === 'content' && (
-                    <PanelBody title={__("Content Controls")} icon="edit">
-                        <RangeControl
-                            label={__("Content Size")}
-                            value={contentSize}
-                            onChange={(value) =>
-                                setAttributes({ contentSize: value })
-                            }
-                            min={12}
-                            max={36}
-                        />
-                        <ColorPalette
-                            label={__("Content Color")}
-                            value={contentColor}
-                            onChange={(value) =>
-                                setAttributes({ contentColor: value })
-                            }
-                        />
-                        <SelectControl
-                            label={__("Content Style")}
-                            value={contentStyle}
-                            options={[
-                                { label: __("Normal"), value: "normal" },
-                                { label: __("Italic"), value: "italic" },
-                                { label: __("Oblique"), value: "oblique" },
-                            ]}
-                            onChange={(value) =>
-                                setAttributes({ contentStyle: value })
-                            }
-                        />
-                    </PanelBody>
-                )}
-                {activePanel === 'title' && (
-                    <PanelBody title={__("Title Controls")} icon="admin-customizer">
-                        <RangeControl
-                            label={__("Title Size")}
-                            value={titleSize}
-                            onChange={(value) =>
-                                setAttributes({ titleSize: value })
-                            }
-                            min={16}
-                            max={72}
-                        />
-                        <ColorPalette
-                            label={__("Title Color")}
-                            value={titleColor}
-                            onChange={(value) =>
-                                setAttributes({ titleColor: value })
-                            }
-                        />
-                        <SelectControl
-                            label={__("Title Style")}
-                            value={titleStyle}
-                            options={[
-                                { label: __("Normal"), value: "normal" },
-                                { label: __("Italic"), value: "italic" },
-                                { label: __("Oblique"), value: "oblique" },
-                            ]}
-                            onChange={(value) =>
-                                setAttributes({ titleStyle: value })
-                            }
-                        />
-                    </PanelBody>
-                )}
-            </InspectorControls>
-            <div className="slider-container">
-                <div
-                    className="slides"
-                    style={{
-                        transform: `translateX(-${currentSlide * 100}%)`,
-                        transition: isEditing
-                            ? "none"
-                            : "transform 0.5s ease-in-out",
-                    }}
-                >
-                    {slides.map((slide, index) => (
-                        <div key={index} className="slide">
-                            <RichText
-                                tagName="h2"
-                                value={slide.title}
-                                onChange={(value) =>
-                                    handleSlideChange(index, "title", value)
-                                }
-                                onFocus={handleEditStart}
-                                onBlur={handleEditEnd}
-                                placeholder={__("Enter title", "easy-slider")}
-                                style={{
-                                    fontSize: `${titleSize}px`,
-                                    color: titleColor,
-                                    fontStyle: titleStyle,
-                                }}
-                            />
-                            {slide.imageUrl ? (
-                                <img
-                                    src={slide.imageUrl}
-                                    alt={slide.title}
-                                    style={{
-                                        width: `${imageSize}px`,
-                                        borderRadius: `${imageBorderRadius}px`,
-                                    }}
-                                />
-                            ) : (
-                                <MediaUpload
-                                    onSelect={(media) =>
-                                        handleSlideChange(
-                                            index,
-                                            "imageUrl",
-                                            media.url
-                                        )
-                                    }
-                                    type="image"
-                                    render={({ open }) => (
-                                        <button onClick={open}>
-                                            {__("Upload Image", "easy-slider")}
-                                        </button>
-                                    )}
-                                />
-                            )}
-                            <RichText
-                                tagName="p"
-                                value={slide.content}
-                                onChange={(value) =>
-                                    handleSlideChange(index, "content", value)
-                                }
-                                onFocus={handleEditStart}
-                                onBlur={handleEditEnd}
-                                placeholder={__(
-                                    "Enter content",
-                                    "easy-slider"
-                                )}
-                                style={{
-                                    fontSize: `${contentSize}px`,
-                                    color: contentColor,
-                                    fontStyle: contentStyle,
-                                }}
-                            />
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <div className="slider-controls">
-                <button className="prev-button" onClick={prevSlide}>
-                    &lt;
-                </button>
-                <button className="next-button" onClick={nextSlide}>
-                    &gt;
-                </button>
-            </div>
-        </div>
-    );
+					{settingsPanelState === "general" && (
+						<General
+							attributes={attributes}
+							setAttributes={setAttributes}
+							slide={currentSlide}
+						/>
+					)}
+					{settingsPanelState === "Style" && (
+						<Content attributes={attributes} setAttributes={setAttributes} />
+					)}
+					{settingsPanelState === "advanced" && (
+						<Title attributes={attributes} setAttributes={setAttributes} />
+					)}
+				</PanelBody>
+			</InspectorControls>
+			<div className="slider-container">
+				<div
+					className="slides"
+					style={{
+						transform: `translateX(-${currentSlide * 100}%)`,
+						transition: isEditing ? "none" : "transform 0.5s ease-in-out",
+					}}
+				>
+					{slides.map((slide, index) => (
+					<div key={index} className="slide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+						{slide.imageUrl ? (
+							<div style={{ height: '400px', width: '50%', padding: '10px', marginBottom: '50px' }}>
+								<img
+									src={slide.imageUrl}
+									alt={slide.title}
+									style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+								/>
+								{editablePrefix && (
+									<RichText
+										tagName='p'
+										className="prefix"
+										value={slide.prefix}
+										onChange={(value) =>
+											handleSlideChange(index, "prefix", value)
+										}
+										onFocus={handleEditStart}
+										onBlur={handleEditEnd}
+										placeholder={__("Enter Prefix", "easy-slider")}
+										style={{
+											textAlign: "center", 
+										}}
+									/>
+								)}
+							</div>
+						) : (
+							""
+						)}
+
+							{editableTitle && (
+								 <div>
+								 <RichText
+									 tagName={tabHeadingTagName}
+									 className="title"
+									 value={slide.title}
+									 onChange={(value) => handleSlideChange(index, "title", value)}
+									 onFocus={handleEditStart}
+									 onBlur={handleEditEnd}
+									 placeholder={__("Enter title", "easy-slider")}
+									 style={{
+										 textAlign: move,
+									 }}
+								 />
+								 <hr className="title-separator" />
+							 </div>
+							)}
+
+							{editableDescription && (
+								<RichText
+									tagName="p"
+									value={slide.content}
+									onChange={(value) =>
+										handleSlideChange(index, "content", value)
+									}
+									onFocus={handleEditStart}
+									onBlur={handleEditEnd}
+									placeholder={__("Enter content", "easy-slider")}
+									style={{
+										fontSize: `${contentSize}px`,
+										color: contentColor,
+										fontStyle: contentStyle,
+										textAlign: move,
+									}}
+								/>
+							)}
+						</div>
+					))}
+				</div>
+			</div>
+			<div className="pagination-dots-button">
+				{slides.map((slide, index) => (
+					<button
+						key={index}
+						className={`dot-xyz ${index === currentSlide ? "active" : ""}`}
+						onClick={() => setCurrentSlide(index)}
+					/>
+				))}
+			</div>
+
+			<div className="slider-controls">
+				<button className="prev-button" onClick={prevSlide}>
+					&lt;
+				</button>
+				<button className="next-button" onClick={nextSlide}>
+					&gt;
+				</button>
+			</div>
+		</div>
+	);
 }

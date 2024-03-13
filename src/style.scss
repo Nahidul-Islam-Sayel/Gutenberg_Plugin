@@ -1,65 +1,64 @@
-.slider-container {
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #e6e6e6;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-}
+// .slider-container {
+//     overflow: hidden;
+//     position: relative;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+ 
+    
+//     background-color: #f9f9f9;
+// }
 
-.slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
+// .slides {
+//     display: flex;
+//     transition: transform 0.5s ease-in-out;
+// }
 
-.slide {
-    flex: 0 0 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
-    padding: 20px;
-    box-sizing: border-box;
-    word-wrap: break-word; 
-}
+// .slide {
+//     flex: 0 0 100%;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center; 
+//     justify-content: center; 
+//     text-align: center; 
+//     padding: 20px;
+//     box-sizing: border-box;
+//     word-wrap: break-word; 
+// }
 
-.slide h2{
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto; 
-}
-.slide p {
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto; 
-}
+// .slide h2{
+//     max-width: 400px;
+//     margin-left: auto;
+//     margin-right: auto; 
+// }
+// .slide p {
+//     max-width: 600px;
+//     margin-left: auto;
+//     margin-right: auto; 
+// }
 
-.slide img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px; 
-}
+// .slide img {
+//     max-width: 100%;
+//     height: auto;
+//     margin-bottom: 20px; 
+// }
 
-.slider-controls {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center; 
-}
+// .slider-controls {
+//     margin-top: 10px;
+//     display: flex;
+//     justify-content: center; 
+// }
 
-.prev-button,
-.next-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    padding: 10px;
-}
+// .prev-button,
+// .next-button {
+//     background-color: transparent;
+//     border: none;
+//     cursor: pointer;
+//     font-size: 24px;
+//     padding: 10px;
+// }
 
-.prev-button:hover,
-.next-button:hover {
-    opacity: 0.7;
-}
+// .prev-button:hover,
+// .next-button:hover {
+//     opacity: 0.7;
+// }
