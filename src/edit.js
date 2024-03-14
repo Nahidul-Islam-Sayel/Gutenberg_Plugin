@@ -20,11 +20,11 @@ import {
 } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 import { Toolbar } from "@wordpress/components";
-import "./editor.scss";
+
 import General from "./Components/General";
 import Content from "./Components/Content";
 import Title from "./Components/Title";
-
+import "./editor.scss";
 export default function Edit({ attributes, setAttributes, isSelected }) {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [isEditing, setIsEditing] = useState(false);
@@ -32,9 +32,6 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 
 	const {
 		slides,
-		titleColor,
-		titleSize,
-		titleStyle,
 		contentColor,
 		contentSize,
 		contentStyle,
@@ -215,7 +212,7 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 						)}
 
 							{editableTitle && (
-								 <div>
+							
 								 <RichText
 									 tagName={tabHeadingTagName}
 									 className="title"
@@ -226,10 +223,12 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 									 placeholder={__("Enter title", "easy-slider")}
 									 style={{
 										 textAlign: move,
+										 maxWidth: "600px",
+										 minWidth: "600px"
 									 }}
 								 />
-								 <hr className="title-separator" />
-							 </div>
+								
+							
 							)}
 
 							{editableDescription && (

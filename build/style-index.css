@@ -1,4 +1,92 @@
 /*!***************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************/
+.slider-container {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
 
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+.slide h2 {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slide p {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slide img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.slider-controls {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.prev-button,
+.next-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  opacity: 0.7;
+}
+
+.pagination-dots-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.dot-xyz {
+  background-color: #bbb;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot-xyz.active {
+  background-color: #333;
+}
+
+.dot-xyz:hover {
+  background-color: #999;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

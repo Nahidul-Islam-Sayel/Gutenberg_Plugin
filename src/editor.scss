@@ -21,13 +21,20 @@
     box-sizing: border-box;
 }
 
-.title{
-    max-width: 600px;
-    margin: 0 auto; /* Center horizontally */
-    word-wrap: break-word;
+.title {
+    text-align: inherit; /* Add this line */
     width: 100%;
+  
+    margin: 0 auto;
+  
+    word-wrap: break-word;
+    
     font-weight: bold;
-}
+   
+  }
+  
+
+
 .prefix{
    color: #999; 
 }
@@ -92,4 +99,17 @@
     border: none;
     border-top: 2px solid #ccc; /* Adjust the color and style of the separator */
     margin: 10px 0; /* Adjust the margin as needed */
+}
+
+element.style h1,
+element.style h2,
+element.style h3,
+element.style h4,
+element.style h5,
+element.style h6
+
+{
+    text-align: left;
+    min-width: 1px;
+    white-space: pre-wrap;
 }

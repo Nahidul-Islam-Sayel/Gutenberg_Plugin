@@ -80,6 +80,10 @@
     "tabHeadingTagName": {
       "type": "string",
       "default": "h2"
+    },
+    "currentSlideIndex": {
+      "type": "number",
+      "default": 0
     }
   },
   "editorScript": "file:./index.js",

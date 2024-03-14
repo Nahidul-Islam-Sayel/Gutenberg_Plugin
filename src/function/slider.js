@@ -4,6 +4,7 @@ jQuery(document).ready(function($) {
 
     function showSlide(index) {
         $('.slides').css('transform', `translateX(-${index * 100}%)`);
+        updatePagination(index);
     }
 
     function nextSlide() {
@@ -23,4 +24,15 @@ jQuery(document).ready(function($) {
     setInterval(function() {
         nextSlide();
     }, 5000);
+
+    // Handle click on pagination dots
+    $('.dot-xyz').on('click', function() {
+        currentSlide = $(this).index();
+        showSlide(currentSlide);
+    });
+
+    function updatePagination(index) {
+        $('.dot-xyz').removeClass('active'); // Remove active class from all dots
+        $('.dot-xyz').eq(index).addClass('active'); // Add active class to the current dot
+    }
 });
