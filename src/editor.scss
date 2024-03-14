@@ -16,59 +16,62 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-   
     padding: 20px;
     box-sizing: border-box;
+    background-color: #f9f9f9; /* Background color for slides */
+    border-radius: 8px; /* Rounded corners for slides */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for slides */
 }
 
 .title {
-    text-align: inherit; /* Add this line */
+    text-align: center;
     width: 100%;
-  
     margin: 0 auto;
-  
     word-wrap: break-word;
-    
     font-weight: bold;
-   
-  }
-  
+    color: #333; /* Title color */
+}
 
-
-.prefix{
-   color: #999; 
+.prefix {
+    color: #666; /* Prefix color */
+    font-style: italic; /* Italic style for prefix */
 }
 
 .slide p {
     max-width: 600px;
     margin: 0 auto; /* Center horizontally */
     word-wrap: break-word;
+    color: #666; /* Content color */
 }
 
 .slide img {
-    max-width: 100%;
-    height: auto;
+    max-width: 100%; /* Adjusted image width */
+    height: auto; /* Maintain aspect ratio */
     margin-bottom: 20px;
+    border-radius: 8px; /* Rounded corners for images */
 }
 
 .slider-controls {
-    margin-top: 10px;
+    margin-top: 20px; /* Increased margin */
     display: flex;
     justify-content: center;
 }
 
 .prev-button,
 .next-button {
-    background-color: transparent;
+    background-color: #333; /* Button background color */
+    color: #fff; /* Button text color */
     border: none;
     cursor: pointer;
     font-size: 24px;
-    padding: 10px;
+    padding: 10px 20px; /* Increased padding */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease;
 }
 
 .prev-button:hover,
 .next-button:hover {
-    opacity: 0.7;
+    background-color: #555; /* Hover background color */
 }
 
 .pagination-dots-button {
@@ -98,18 +101,36 @@
 .title-separator {
     border: none;
     border-top: 2px solid #ccc; /* Adjust the color and style of the separator */
-    margin: 10px 0; /* Adjust the margin as needed */
+    margin: 20px 0; /* Increased margin */
+}
+.slide {
+    position: relative;
 }
 
-element.style h1,
-element.style h2,
-element.style h3,
-element.style h4,
-element.style h5,
-element.style h6
+.slide img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto;
+    display: block; /* Ensure images don't overflow container */
+    margin-bottom: 20px;
+    border-radius: 8px; /* Rounded corners for images */
+}
+.slide {
+    position: relative;
+}
 
-{
-    text-align: left;
-    min-width: 1px;
-    white-space: pre-wrap;
+.slide .image-wrapper {
+    max-width: 100%;
+    height: 400px; /* Fixed height for the image */
+    overflow: hidden;
+}
+
+.slide .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
+.slide img {
+    max-width: 600px;
+    height: 400px;
+    margin-bottom: 20px; 
 }

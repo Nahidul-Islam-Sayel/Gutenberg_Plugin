@@ -32,6 +32,7 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 
 	const {
 		slides,
+	
 		contentColor,
 		contentSize,
 		contentStyle,
@@ -184,13 +185,15 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 					{slides.map((slide, index) => (
 					<div key={index} className="slide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 						{slide.imageUrl ? (
-							<div style={{ height: '400px', width: '50%', padding: '10px', marginBottom: '50px' }}>
-								<img
-									src={slide.imageUrl}
-									alt={slide.title}
-									style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-								/>
-								{editablePrefix && (
+							<div style={{  }}>
+							 <div className="image-wrapper">
+                                    <img
+                                        src={slide.imageUrl}
+                                        alt={slide.title}
+                                        className="slide-image"
+                                    />
+                                </div>
+								{/* {editablePrefix && (
 									<RichText
 										tagName='p'
 										className="prefix"
@@ -205,7 +208,7 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 											textAlign: "center", 
 										}}
 									/>
-								)}
+								)} */}
 							</div>
 						) : (
 							""

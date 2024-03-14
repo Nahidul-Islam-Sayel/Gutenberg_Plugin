@@ -6,12 +6,8 @@ export default function save({ attributes }) {
     const {
         slides,
         currentSlideIndex,
-        contentColor,
-        contentSize,
-        contentStyle,
-        titleSize,
-        titleColor,
-        titleStyle,
+        move,
+        tabHeadingTagName
     } = attributes;
 
     const handleDotClick = (index) => {
@@ -26,26 +22,21 @@ export default function save({ attributes }) {
                 <div className="slides">
                     {slides.map((slide, index) => (
                         <div key={index} className={`slide ${index === currentSlideIndex ? "active" : ""}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          
-                            {slide.imageUrl && (
-                                  <div style={{ height: '400px', width: '50%', padding: '10px', marginBottom: '50px' }}>
-                                <img
-                                    src={slide.imageUrl}
-                                    alt={slide.title}
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                                  
-                                />
-                                
+                              {slide.imageUrl && (
+                                <div className="image-wrapper">
+                                    <img
+                                        src={slide.imageUrl}
+                                        alt={slide.title}
+                                        className="slide-image"
+                                    />
                                 </div>
                             )}
                             <RichText.Content
                                 className='title'
-                                tagName="h2"
+                                tagName={tabHeadingTagName } // Default to 'h2' if tabHeadingTagName is not provided
                                 value={slide.title}
                                 style={{
-                                    fontSize: `${titleSize}px`,
-                                    color: titleColor,
-                                    fontStyle: titleStyle,
+                                    textAlign: move,
                                 }}
                             />
                             <RichText.Content
@@ -53,9 +44,7 @@ export default function save({ attributes }) {
                                 tagName="p"
                                 value={slide.content}
                                 style={{
-                                    fontSize: `${contentSize}px`,
-                                    color: contentColor,
-                                    fontStyle: contentStyle,
+                                    textAlign: move,
                                 }}
                             />
                         </div>

@@ -470,32 +470,14 @@ function Edit({
       justifyContent: 'center'
     }
   }, slide.imageUrl ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    style: {
-      height: '400px',
-      width: '50%',
-      padding: '10px',
-      marginBottom: '50px'
-    }
+    style: {}
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "image-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: slide.imageUrl,
     alt: slide.title,
-    style: {
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover'
-    }
-  }), editablePrefix && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
-    tagName: "p",
-    className: "prefix",
-    value: slide.prefix,
-    onChange: value => handleSlideChange(index, "prefix", value),
-    onFocus: handleEditStart,
-    onBlur: handleEditEnd,
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enter Prefix", "easy-slider"),
-    style: {
-      textAlign: "center"
-    }
-  })) : "", editableTitle && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    className: "slide-image"
+  }))) : "", editableTitle && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
     tagName: tabHeadingTagName,
     className: "title",
     value: slide.title,
@@ -590,12 +572,8 @@ function save({
   const {
     slides,
     currentSlideIndex,
-    contentColor,
-    contentSize,
-    contentStyle,
-    titleSize,
-    titleColor,
-    titleStyle
+    move,
+    tabHeadingTagName
   } = attributes;
   const handleDotClick = index => {
     // Since this is the save function, you shouldn't set attributes here
@@ -617,37 +595,25 @@ function save({
       justifyContent: 'center'
     }
   }, slide.imageUrl && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    style: {
-      height: '400px',
-      width: '50%',
-      padding: '10px',
-      marginBottom: '50px'
-    }
+    className: "image-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: slide.imageUrl,
     alt: slide.title,
-    style: {
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover'
-    }
+    className: "slide-image"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
     className: "title",
-    tagName: "h2",
+    tagName: tabHeadingTagName // Default to 'h2' if tabHeadingTagName is not provided
+    ,
     value: slide.title,
     style: {
-      fontSize: `${titleSize}px`,
-      color: titleColor,
-      fontStyle: titleStyle
+      textAlign: move
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
     className: "content",
     tagName: "p",
     value: slide.content,
     style: {
-      fontSize: `${contentSize}px`,
-      color: contentColor,
-      fontStyle: contentStyle
+      textAlign: move
     }
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pagination-dots-button"
