@@ -21,18 +21,19 @@
 					"title": "New Slide",
 					"content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
 					"imageUrl": "",
-					"prefix":"Image 1"
+					"prefix": "Image 1"
 				},
 				{
 					"title": "New Slide",
 					"content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
 					"imageUrl": "",
-					"prefix":"Image 1"
-				},{
+					"prefix": "Image 1"
+				},
+				{
 					"title": "New Slide",
 					"content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
 					"imageUrl": "",
-					"prefix":"Image 1"
+					"prefix": "Image 1"
 				}
 			]
 		},
@@ -80,11 +81,49 @@
 			"type": "string",
 			"default": "h2"
 		},
-		"currentSlideIndex":{
+		"currentSlideIndex": {
 			"type": "number",
 			"default": 0
+		},
+		"contentFontFamily": {
+			"type": "string",
+			"default": ""
+		},
+		"fontCategory": {
+			"type": "string",
+			"default": ""
+		},
+		"fontVisualStyle": {
+			"type": "string",
+			"default": "default"
+		},
+		"fontWidth": {
+			"type": "string",
+			"default": "400"
+		},
+		"fontVariants": {
+			"type": "array",
+			"default": [
+				{
+					"label": "400",
+					"value": "400",
+					"id": 1
+				},
+				{
+					"label": "600",
+					"value": "600",
+					"id": 2
+				}
+			]
+		},
+		"ContenttextDecoration": {
+			"type": "string",
+			"default": "none"
+		},
+		"fontSize": {
+			"type": "number",
+			"default": "17"
 		}
-
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

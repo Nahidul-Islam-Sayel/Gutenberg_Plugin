@@ -1,28 +1,23 @@
-import React from "react";
-import { __ } from "@wordpress/i18n";
 import {
-	useBlockProps,
-	RichText,
-	MediaUpload,
 	BlockControls,
 	InspectorControls,
+	RichText,
+	useBlockProps
 } from "@wordpress/block-editor";
 import {
 	Button,
-	PanelBody,
-	RangeControl,
-	ColorPalette,
-	SelectControl,
-	ToggleControl,
 	__experimentalDivider as Divider,
+	PanelBody,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
+	Toolbar
 } from "@wordpress/components";
-import { useState, useEffect } from "@wordpress/element";
-import { Toolbar } from "@wordpress/components";
+import { useEffect, useState } from "@wordpress/element";
+import { __ } from "@wordpress/i18n";
+import React from "react";
 
 import General from "./Components/General";
-import Content from "./Components/Content";
+import Style from "./Components/style";
 import Title from "./Components/Title";
 import "./editor.scss";
 export default function Edit({ attributes, setAttributes, isSelected }) {
@@ -42,6 +37,10 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 		editableTitle,
 		editableDescription,
 		tabHeadingTagName,
+		contentFontFamily,
+		fontCategory,
+		ContenttextDecoration,
+		fontVisualStyle
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -154,7 +153,7 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 						isBlock
 					>
 						<ToggleGroupControlOption value="general" label="General" />
-						<ToggleGroupControlOption value="style" label="Style" />
+						<ToggleGroupControlOption value="Style" label="Style" />
 						<ToggleGroupControlOption value="advanced" label="Advanced" />
 					</ToggleGroupControl>
 					<Divider />
@@ -167,7 +166,7 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 						/>
 					)}
 					{settingsPanelState === "Style" && (
-						<Content attributes={attributes} setAttributes={setAttributes} />
+						<Style attributes={attributes} setAttributes={setAttributes} />
 					)}
 					{settingsPanelState === "advanced" && (
 						<Title attributes={attributes} setAttributes={setAttributes} />
@@ -249,6 +248,11 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 										color: contentColor,
 										fontStyle: contentStyle,
 										textAlign: move,
+										fontFamily: `${(contentFontFamily, fontCategory)
+										}`,
+									
+										textDecoration: ContenttextDecoration,
+										fontStyle: fontVisualStyle,
 									}}
 								/>
 							)}

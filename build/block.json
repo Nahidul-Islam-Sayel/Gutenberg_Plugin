@@ -84,6 +84,45 @@
     "currentSlideIndex": {
       "type": "number",
       "default": 0
+    },
+    "contentFontFamily": {
+      "type": "string",
+      "default": ""
+    },
+    "fontCategory": {
+      "type": "string",
+      "default": ""
+    },
+    "fontVisualStyle": {
+      "type": "string",
+      "default": "default"
+    },
+    "fontWidth": {
+      "type": "string",
+      "default": "400"
+    },
+    "fontVariants": {
+      "type": "array",
+      "default": [
+        {
+          "label": "400",
+          "value": "400",
+          "id": 1
+        },
+        {
+          "label": "600",
+          "value": "600",
+          "id": 2
+        }
+      ]
+    },
+    "ContenttextDecoration": {
+      "type": "string",
+      "default": "none"
+    },
+    "fontSize": {
+      "type": "number",
+      "default": "17"
     }
   },
   "editorScript": "file:./index.js",
