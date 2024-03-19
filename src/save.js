@@ -19,6 +19,12 @@ export default function save({ attributes }) {
 		fontCategory,
 		ContenttextDecoration,
 		fontVisualStyle,
+		titleSize,
+		titleColor,
+		titleFontFamily,
+		TitlefontVisualStyle,
+		TitletextDecoration,
+		TitlefontCategory
 	} = attributes;
 
 	const handleDotClick = (index) => {
@@ -55,7 +61,15 @@ export default function save({ attributes }) {
 								tagName={tabHeadingTagName} // Default to 'h2' if tabHeadingTagName is not provided
 								value={slide.title}
 								style={{
-									textAlign: move,
+									fontSize: `${titleSize}px`,
+										color: titleColor,
+										
+										textAlign: move,
+										fontFamily: `${(titleFontFamily, TitlefontCategory)
+										}`,
+									
+										textDecoration: TitletextDecoration,
+										fontStyle: TitlefontVisualStyle,
 								}}
 							/>
 							<RichText.Content

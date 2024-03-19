@@ -25,6 +25,12 @@ const Content = ({ attributes, setAttributes }) => {
 		ContenttextDecoration,
 		fontVariants,
 		fontCategory,
+		titleSize,
+		titleColor,
+		titleFontFamily,
+		TitlefontVisualStyle,
+		TitletextDecoration,
+		TitlefontCategory
 	} = attributes;
 	useEffect(() => {
 		const apiUrl = `https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDk4pe9MNGVrt3llulmdlfNWaQxzCc_b88`;
@@ -141,6 +147,98 @@ const Content = ({ attributes, setAttributes }) => {
 			</PanelBody>
 
 			<Divider />
+			<PanelBody title={__("Title Controls")} icon="edit">
+				<RangeControl
+					label={__("Title Size")}
+					value={titleSize}
+					onChange={(value) => setAttributes({ titleSize: value })}
+					min={12}
+					max={36}
+				/>
+				<ColorPalette
+					label={__("Title Color")}
+					value={titleColor}
+					onChange={(value) => setAttributes({ titleColor: value })}
+				/>
+
+				<SelectControl
+					label={__("Select Font Family", "demo-tabs")}
+					value={titleFontFamily}
+					options={fontFamilies}
+					onChange={(value) => {
+						const font = allFonts.find((f) => f.family === value);
+
+						const fontVariantsLabel = (font?.variants || [])
+							.filter((f) => !isNaN(f))
+							.map((f, i) => ({
+								label: f,
+								value: f,
+								id: i,
+							}));
+
+						const defaultVariants = [
+							{
+								label: 400,
+								value: 400,
+								id: 1,
+							},
+							{
+								label: 600,
+								value: 600,
+								id: 2,
+							},
+						];
+						setAttributes({
+							titleFontFamily: font.family,
+							TitlefontCategory: font.category,
+							fontVariants:
+								fontVariantsLabel.length > 1
+									? fontVariantsLabel
+									: defaultVariants,
+						});
+					}}
+				/>
+				<MenuGroup label={__("Font Style", "demo-tabs")}>
+					<SelectControl
+						value={TitlefontVisualStyle}
+						options={[
+							{ label: "Default", value: "normal" },
+							{ label: "Italic", value: "italic" },
+						]}
+						onChange={(change) => {
+							setAttributes({
+								TitlefontVisualStyle: change,
+							});
+						}}
+						__nextHasNoMarginBottom
+					/>
+				</MenuGroup>
+				<MenuGroup label={__("Text Decoration", "demo-tabs")}>
+					<ToggleGroupControl
+						onChange={(state) => {
+							setAttributes({
+								TitletextDecoration: state,
+							});
+						}}
+						value={TitletextDecoration}
+						isBlock
+					>
+						<ToggleGroupControlOption value="none" label="T" />
+						<ToggleGroupControlOption
+							value="underline"
+							label={<Dashicon icon="editor-underline" />}
+						/>
+						<ToggleGroupControlOption
+							value="line-through"
+							label={<Dashicon icon="editor-strikethrough" />}
+						/>
+						<ToggleGroupControlOption
+							value="overline"
+							label={<Dashicon icon="editor-paste-text" />}
+						/>
+					</ToggleGroupControl>
+				</MenuGroup>
+			</PanelBody>
 		</div>
 	);
 };

@@ -40,7 +40,13 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 		contentFontFamily,
 		fontCategory,
 		ContenttextDecoration,
-		fontVisualStyle
+		fontVisualStyle,
+		titleSize,
+		titleColor,
+		titleFontFamily,
+		TitlefontVisualStyle,
+		TitletextDecoration,
+		TitlefontCategory
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -224,7 +230,15 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 									 onBlur={handleEditEnd}
 									 placeholder={__("Enter title", "easy-slider")}
 									 style={{
-										 textAlign: move,
+										fontSize: `${titleSize}px`,
+										color: titleColor,
+										
+										textAlign: move,
+										fontFamily: `${(titleFontFamily, TitlefontCategory)
+										}`,
+									
+										textDecoration: TitletextDecoration,
+										fontStyle: TitlefontVisualStyle,
 										 maxWidth: "600px",
 										 minWidth: "600px"
 									 }}

@@ -123,6 +123,22 @@
 		"fontSize": {
 			"type": "number",
 			"default": "17"
+		},
+		"titleFontFamily": {
+			"type": "string",
+			"default": ""
+		},
+		"TitlefontVisualStyle": {
+			"type": "string",
+			"default": "default"
+		},
+		"TitletextDecoration": {
+			"type": "string",
+			"default": "none"
+		},
+		"TitlefontCategory": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"editorScript": "file:./index.js",

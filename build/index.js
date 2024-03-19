@@ -253,7 +253,13 @@ const Content = ({
     fontWidth,
     ContenttextDecoration,
     fontVariants,
-    fontCategory
+    fontCategory,
+    titleSize,
+    titleColor,
+    titleFontFamily,
+    TitlefontVisualStyle,
+    TitletextDecoration,
+    TitlefontCategory
   } = attributes;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
     const apiUrl = `https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDk4pe9MNGVrt3llulmdlfNWaQxzCc_b88`;
@@ -358,7 +364,95 @@ const Content = ({
     label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
       icon: "editor-paste-text"
     })
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalDivider, null));
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalDivider, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Title Controls"),
+    icon: "edit"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Title Size"),
+    value: titleSize,
+    onChange: value => setAttributes({
+      titleSize: value
+    }),
+    min: 12,
+    max: 36
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Title Color"),
+    value: titleColor,
+    onChange: value => setAttributes({
+      titleColor: value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Select Font Family", "demo-tabs"),
+    value: titleFontFamily,
+    options: fontFamilies,
+    onChange: value => {
+      const font = allFonts.find(f => f.family === value);
+      const fontVariantsLabel = (font?.variants || []).filter(f => !isNaN(f)).map((f, i) => ({
+        label: f,
+        value: f,
+        id: i
+      }));
+      const defaultVariants = [{
+        label: 400,
+        value: 400,
+        id: 1
+      }, {
+        label: 600,
+        value: 600,
+        id: 2
+      }];
+      setAttributes({
+        titleFontFamily: font.family,
+        TitlefontCategory: font.category,
+        fontVariants: fontVariantsLabel.length > 1 ? fontVariantsLabel : defaultVariants
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.MenuGroup, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Font Style", "demo-tabs")
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+    value: TitlefontVisualStyle,
+    options: [{
+      label: "Default",
+      value: "normal"
+    }, {
+      label: "Italic",
+      value: "italic"
+    }],
+    onChange: change => {
+      setAttributes({
+        TitlefontVisualStyle: change
+      });
+    },
+    __nextHasNoMarginBottom: true
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.MenuGroup, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Text Decoration", "demo-tabs")
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
+    onChange: state => {
+      setAttributes({
+        TitletextDecoration: state
+      });
+    },
+    value: TitletextDecoration,
+    isBlock: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
+    value: "none",
+    label: "T"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
+    value: "underline",
+    label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+      icon: "editor-underline"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
+    value: "line-through",
+    label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+      icon: "editor-strikethrough"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
+    value: "overline",
+    label: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+      icon: "editor-paste-text"
+    })
+  })))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Content);
 
@@ -420,7 +514,13 @@ function Edit({
     contentFontFamily,
     fontCategory,
     ContenttextDecoration,
-    fontVisualStyle
+    fontVisualStyle,
+    titleSize,
+    titleColor,
+    titleFontFamily,
+    TitlefontVisualStyle,
+    TitletextDecoration,
+    TitlefontCategory
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
@@ -569,7 +669,12 @@ function Edit({
     onBlur: handleEditEnd,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Enter title", "easy-slider"),
     style: {
+      fontSize: `${titleSize}px`,
+      color: titleColor,
       textAlign: move,
+      fontFamily: `${(titleFontFamily, TitlefontCategory)}`,
+      textDecoration: TitletextDecoration,
+      fontStyle: TitlefontVisualStyle,
       maxWidth: "600px",
       minWidth: "600px"
     }
@@ -669,7 +774,13 @@ function save({
     contentFontFamily,
     fontCategory,
     ContenttextDecoration,
-    fontVisualStyle
+    fontVisualStyle,
+    titleSize,
+    titleColor,
+    titleFontFamily,
+    TitlefontVisualStyle,
+    TitletextDecoration,
+    TitlefontCategory
   } = attributes;
   const handleDotClick = index => {
     // Since this is the save function, you shouldn't set attributes here
@@ -702,7 +813,12 @@ function save({
     ,
     value: slide.title,
     style: {
-      textAlign: move
+      fontSize: `${titleSize}px`,
+      color: titleColor,
+      textAlign: move,
+      fontFamily: `${(titleFontFamily, TitlefontCategory)}`,
+      textDecoration: TitletextDecoration,
+      fontStyle: TitlefontVisualStyle
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
     className: "content",
@@ -824,7 +940,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/easy-slider","version":"0.1.0","title":"Easy Slider","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":true},"textdomain":"easy-slider","attributes":{"slides":{"type":"array","default":[{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"},{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"},{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"}]},"imageSize":{"type":"string","default":"medium"},"imageRadius":{"type":"number","default":0},"settingsPanelState":{"type":"string","default":"image"},"titleColor":{"type":"string","default":""},"titleSize":{"type":"number","default":24},"titleStyle":{"type":"string","default":"normal"},"move":{"type":"string","default":"center"},"editablePrefix":{"type":"boolean","default":false},"editableTitle":{"type":"boolean","default":true},"editableDescription":{"type":"boolean","default":true},"tabHeadingTagName":{"type":"string","default":"h2"},"currentSlideIndex":{"type":"number","default":0},"contentFontFamily":{"type":"string","default":""},"fontCategory":{"type":"string","default":""},"fontVisualStyle":{"type":"string","default":"default"},"fontWidth":{"type":"string","default":"400"},"fontVariants":{"type":"array","default":[{"label":"400","value":"400","id":1},{"label":"600","value":"600","id":2}]},"ContenttextDecoration":{"type":"string","default":"none"},"fontSize":{"type":"number","default":"17"}},"editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/easy-slider","version":"0.1.0","title":"Easy Slider","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":true},"textdomain":"easy-slider","attributes":{"slides":{"type":"array","default":[{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"},{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"},{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"}]},"imageSize":{"type":"string","default":"medium"},"imageRadius":{"type":"number","default":0},"settingsPanelState":{"type":"string","default":"image"},"titleColor":{"type":"string","default":""},"titleSize":{"type":"number","default":24},"titleStyle":{"type":"string","default":"normal"},"move":{"type":"string","default":"center"},"editablePrefix":{"type":"boolean","default":false},"editableTitle":{"type":"boolean","default":true},"editableDescription":{"type":"boolean","default":true},"tabHeadingTagName":{"type":"string","default":"h2"},"currentSlideIndex":{"type":"number","default":0},"contentFontFamily":{"type":"string","default":""},"fontCategory":{"type":"string","default":""},"fontVisualStyle":{"type":"string","default":"default"},"fontWidth":{"type":"string","default":"400"},"fontVariants":{"type":"array","default":[{"label":"400","value":"400","id":1},{"label":"600","value":"600","id":2}]},"ContenttextDecoration":{"type":"string","default":"none"},"fontSize":{"type":"number","default":"17"},"titleFontFamily":{"type":"string","default":""},"TitlefontVisualStyle":{"type":"string","default":"default"},"TitletextDecoration":{"type":"string","default":"none"},"TitlefontCategory":{"type":"string","default":""}},"editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
