@@ -52,7 +52,7 @@ const General = ({ attributes, setAttributes, slide }) => {
                             <Button onClick={open}>
                                 {slides[slide].imageUrl ? __("Change Image") : __("Select Image")}
                             </Button>
-                            {slides && (
+                            {slides[slide].imageUrl  && (
                                 <>
                                     <Button onClick={removePicture}>
                                         {__("Remove Image")}

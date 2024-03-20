@@ -46,7 +46,8 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 		titleFontFamily,
 		TitlefontVisualStyle,
 		TitletextDecoration,
-		TitlefontCategory
+		TitlefontCategory,
+		imageBorderRadius
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -196,24 +197,12 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
                                         src={slide.imageUrl}
                                         alt={slide.title}
                                         className="slide-image"
+										style={{
+											borderRadius: `${imageBorderRadius}px`,
+										}}
                                     />
                                 </div>
-								{/* {editablePrefix && (
-									<RichText
-										tagName='p'
-										className="prefix"
-										value={slide.prefix}
-										onChange={(value) =>
-											handleSlideChange(index, "prefix", value)
-										}
-										onFocus={handleEditStart}
-										onBlur={handleEditEnd}
-										placeholder={__("Enter Prefix", "easy-slider")}
-										style={{
-											textAlign: "center", 
-										}}
-									/>
-								)} */}
+							
 							</div>
 						) : (
 							""

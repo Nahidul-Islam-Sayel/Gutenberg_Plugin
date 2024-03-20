@@ -147,6 +147,10 @@
         "tablet": false,
         "mobile": false
       }
+    },
+    "imageBorderRadius": {
+      "type": "number",
+      "default": 0
     }
   },
   "editorScript": "file:./index.js",

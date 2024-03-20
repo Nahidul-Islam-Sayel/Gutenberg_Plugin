@@ -25,7 +25,8 @@ export default function save({ attributes }) {
 		TitlefontVisualStyle,
 		TitletextDecoration,
 		TitlefontCategory,
-		responsiveConditions
+		responsiveConditions,
+		imageBorderRadius
 	} = attributes;
 
 	const isHiddenDesktop = responsiveConditions.desktop ? 'hidden-desktop' : '';
@@ -54,6 +55,9 @@ export default function save({ attributes }) {
 										src={slide.imageUrl}
 										alt={slide.title}
 										className="slide-image"
+										style={{
+											borderRadius: `${imageBorderRadius}px`,
+										}}
 									/>
 								</div>
 							)}

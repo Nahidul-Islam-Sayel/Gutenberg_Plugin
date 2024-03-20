@@ -30,7 +30,8 @@ const Content = ({ attributes, setAttributes }) => {
 		titleFontFamily,
 		TitlefontVisualStyle,
 		TitletextDecoration,
-		TitlefontCategory
+		TitlefontCategory,
+		imageBorderRadius
 	} = attributes;
 	useEffect(() => {
 		const apiUrl = `https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDk4pe9MNGVrt3llulmdlfNWaQxzCc_b88`;
@@ -239,6 +240,18 @@ const Content = ({ attributes, setAttributes }) => {
 					</ToggleGroupControl>
 				</MenuGroup>
 			</PanelBody>
+			<PanelBody title={__("Image Controls")} icon="format-image">
+                        <RangeControl
+                            label={__("Border Radius")}
+                            value={imageBorderRadius}
+                            onChange={(value) =>
+                                setAttributes({ imageBorderRadius: value })
+                            }
+                            min={0}
+                            max={50}
+                        />
+                      
+                </PanelBody>
 		</div>
 	);
 };
