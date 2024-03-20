@@ -221,28 +221,28 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 
 							{editableTitle && (
 							
-								 <RichText
-									 tagName={tabHeadingTagName}
-									 className="title"
-									 value={slide.title}
-									 onChange={(value) => handleSlideChange(index, "title", value)}
-									 onFocus={handleEditStart}
-									 onBlur={handleEditEnd}
-									 placeholder={__("Enter title", "easy-slider")}
-									 style={{
-										fontSize: `${titleSize}px`,
-										color: titleColor,
-										
-										textAlign: move,
-										fontFamily: `${(titleFontFamily, TitlefontCategory)
-										}`,
-									
-										textDecoration: TitletextDecoration,
-										fontStyle: TitlefontVisualStyle,
-										 maxWidth: "600px",
-										 minWidth: "600px"
-									 }}
-								 />
+							<RichText
+							tagName={tabHeadingTagName}
+							className="title"
+							value={slide.title}
+							onChange={(value) => handleSlideChange(index, "title", value)}
+							onFocus={handleEditStart}
+							onBlur={handleEditEnd}
+							placeholder={__("Enter title", "easy-slider")}
+							style={{
+								
+								color: titleColor,
+								textAlign: move,
+								fontFamily: `${titleFontFamily}, ${TitlefontCategory}`,
+								textDecoration: TitletextDecoration,
+								fontStyle: TitlefontVisualStyle,
+								maxWidth: "600px",
+								minWidth: "600px",
+								tagName: tabHeadingTagName 
+							}}
+						
+						/>
+						
 								
 							
 							)}

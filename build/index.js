@@ -135,7 +135,7 @@ const General = ({
       [key]: !attributes[key]
     });
   };
-  const headerLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
+  const headerLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
   const handleSelectImage = media => {
     const updatedSlides = [...slides];
     updatedSlides[slide].imageUrl = media.url;
@@ -373,15 +373,7 @@ const Content = ({
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalDivider, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Title Controls"),
     icon: "edit"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Title Size"),
-    value: titleSize,
-    onChange: value => setAttributes({
-      titleSize: value
-    }),
-    min: 12,
-    max: 36
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Title Color"),
     value: titleColor,
     onChange: value => setAttributes({
@@ -675,14 +667,14 @@ function Edit({
     onBlur: handleEditEnd,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Enter title", "easy-slider"),
     style: {
-      fontSize: `${titleSize}px`,
       color: titleColor,
       textAlign: move,
-      fontFamily: `${(titleFontFamily, TitlefontCategory)}`,
+      fontFamily: `${titleFontFamily}, ${TitlefontCategory}`,
       textDecoration: TitletextDecoration,
       fontStyle: TitlefontVisualStyle,
       maxWidth: "600px",
-      minWidth: "600px"
+      minWidth: "600px",
+      tagName: tabHeadingTagName
     }
   }), editableDescription && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
     tagName: "p",

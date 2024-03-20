@@ -24,7 +24,7 @@ const General = ({ attributes, setAttributes, slide }) => {
         setAttributes({ [key]: !attributes[key] });
     };
 
-    const headerLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
+    const headerLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
     const handleSelectImage = (media) => {
 		const updatedSlides = [...slides];
 		updatedSlides[slide].imageUrl = media.url;

@@ -148,13 +148,13 @@ const Content = ({ attributes, setAttributes }) => {
 
 			<Divider />
 			<PanelBody title={__("Title Controls")} icon="edit">
-				<RangeControl
+				{/* <RangeControl
 					label={__("Title Size")}
 					value={titleSize}
 					onChange={(value) => setAttributes({ titleSize: value })}
 					min={12}
 					max={36}
-				/>
+				/> */}
 				<ColorPalette
 					label={__("Title Color")}
 					value={titleColor}
