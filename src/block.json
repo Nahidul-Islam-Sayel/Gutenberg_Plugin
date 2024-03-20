@@ -139,6 +139,14 @@
 		"TitlefontCategory": {
 			"type": "string",
 			"default": ""
+		},
+		"responsiveConditions": {
+			"type": "object",
+			"default": {
+				"desktop": false,
+				"tablet": false,
+				"mobile": false
+			}
 		}
 	},
 	"editorScript": "file:./index.js",

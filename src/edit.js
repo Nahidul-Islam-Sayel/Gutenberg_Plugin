@@ -18,7 +18,7 @@ import React from "react";
 
 import General from "./Components/General";
 import Style from "./Components/style";
-import Title from "./Components/Title";
+import Advance from "./Components/Advance";
 import "./editor.scss";
 export default function Edit({ attributes, setAttributes, isSelected }) {
 	const [currentSlide, setCurrentSlide] = useState(0);
@@ -175,7 +175,7 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 						<Style attributes={attributes} setAttributes={setAttributes} />
 					)}
 					{settingsPanelState === "advanced" && (
-						<Title attributes={attributes} setAttributes={setAttributes} />
+						<Advance attributes={attributes} setAttributes={setAttributes} />
 					)}
 				</PanelBody>
 			</InspectorControls>

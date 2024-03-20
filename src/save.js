@@ -24,18 +24,19 @@ export default function save({ attributes }) {
 		titleFontFamily,
 		TitlefontVisualStyle,
 		TitletextDecoration,
-		TitlefontCategory
+		TitlefontCategory,
+		responsiveConditions
 	} = attributes;
 
-	const handleDotClick = (index) => {
-		// Since this is the save function, you shouldn't set attributes here
-		// This function should only handle displaying the saved content
-		// setAttributes({ currentSlideIndex: index });
-	};
+	const isHiddenDesktop = responsiveConditions.desktop ? 'hidden-desktop' : '';
+	const isHiddenTablet = responsiveConditions.tablet ? 'hidden-tablet' : '';
+	const isHiddenMobile = responsiveConditions.mobile ? 'hidden-mobile' : '';
+
 
 	return (
 		<div {...useBlockProps.save()}>
-			<div className="slider-container">
+			<div className={`${isHiddenDesktop} ${isHiddenTablet} ${isHiddenMobile}`}>
+			<div className={`slider-container`}>
 				<div className="slides">
 					{slides.map((slide, index) => (
 						<div
@@ -104,6 +105,7 @@ export default function save({ attributes }) {
 			<div className="slider-controls">
 				<button className="prev-button">&lt;</button>
 				<button className="next-button">&gt;</button>
+			</div>
 			</div>
 		</div>
 	);

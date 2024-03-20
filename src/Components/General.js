@@ -85,11 +85,7 @@ const General = ({ attributes, setAttributes, slide }) => {
                     </ButtonGroup>
                 </MenuGroup>
                 <MenuGroup label={__("Content Settings", "demo-tabs")}>
-                    <ToggleControl
-                        label={__("Enable Prefix")}
-                        checked={editablePrefix}
-                        onChange={() => handleToggleChange("editablePrefix")}
-                    />
+                
                     <ToggleControl
                         label={__("Enable Title")}
                         checked={editableTitle}

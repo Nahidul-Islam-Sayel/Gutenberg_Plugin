@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Easy Slider
+ * Plugin Name:       Easy Sliderr
  * Description:       Example block scaffolded with Create Block tool.
  * Requires at least: 6.1
  * Requires PHP:      7.0

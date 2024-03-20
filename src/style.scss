@@ -96,3 +96,22 @@
 .dot-xyz:hover {
     background-color: #999;
 }
+@media (max-width: 576px) {
+	.hidden-mobile {
+		display: none;
+	}
+}
+
+// tablet css
+@media (min-width: 577px) and (max-width: 992px) {
+	.hidden-tablet {
+		display: none;
+	}
+}
+
+// desktop css
+@media (min-width: 993px) {
+	.hidden-desktop {
+		display: none;
+	}
+}

@@ -68,7 +68,7 @@ const Content = ({ attributes, setAttributes }) => {
 				/>
 
 				<SelectControl
-					label={__("Select Font Family", "demo-tabs")}
+					label={__("Select Font Family", "easy-slider")}
 					value={contentFontFamily}
 					options={fontFamilies}
 					onChange={(value) => {
@@ -104,7 +104,7 @@ const Content = ({ attributes, setAttributes }) => {
 						});
 					}}
 				/>
-				<MenuGroup label={__("Font Style", "demo-tabs")}>
+				<MenuGroup label={__("Font Style", "easy-slider")}>
 					<SelectControl
 						value={fontVisualStyle}
 						options={[
@@ -119,7 +119,7 @@ const Content = ({ attributes, setAttributes }) => {
 						__nextHasNoMarginBottom
 					/>
 				</MenuGroup>
-				<MenuGroup label={__("Text Decoration", "demo-tabs")}>
+				<MenuGroup label={__("Text Decoration", "easy-slider")}>
 					<ToggleGroupControl
 						onChange={(state) => {
 							setAttributes({
@@ -162,7 +162,7 @@ const Content = ({ attributes, setAttributes }) => {
 				/>
 
 				<SelectControl
-					label={__("Select Font Family", "demo-tabs")}
+					label={__("Select Font Family", "easy-slider")}
 					value={titleFontFamily}
 					options={fontFamilies}
 					onChange={(value) => {
@@ -198,7 +198,7 @@ const Content = ({ attributes, setAttributes }) => {
 						});
 					}}
 				/>
-				<MenuGroup label={__("Font Style", "demo-tabs")}>
+				<MenuGroup label={__("Font Style", "easy-slider")}>
 					<SelectControl
 						value={TitlefontVisualStyle}
 						options={[
@@ -213,7 +213,7 @@ const Content = ({ attributes, setAttributes }) => {
 						__nextHasNoMarginBottom
 					/>
 				</MenuGroup>
-				<MenuGroup label={__("Text Decoration", "demo-tabs")}>
+				<MenuGroup label={__("Text Decoration", "easy-slider")}>
 					<ToggleGroupControl
 						onChange={(state) => {
 							setAttributes({

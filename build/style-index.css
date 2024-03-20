@@ -94,4 +94,20 @@
   background-color: #999;
 }
 
+@media (max-width: 576px) {
+  .hidden-mobile {
+    display: none;
+  }
+}
+@media (min-width: 577px) and (max-width: 992px) {
+  .hidden-tablet {
+    display: none;
+  }
+}
+@media (min-width: 993px) {
+  .hidden-desktop {
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=style-index.css.map*/
