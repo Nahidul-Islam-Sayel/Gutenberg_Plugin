@@ -8,6 +8,7 @@ import {
 	SelectControl,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
+	ToggleControl
 } from "@wordpress/components";
 import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -31,7 +32,11 @@ const Content = ({ attributes, setAttributes }) => {
 		TitlefontVisualStyle,
 		TitletextDecoration,
 		TitlefontCategory,
-		imageBorderRadius
+		imageBorderRadius,
+		sliderPadding,
+		sliderBorder,
+		sliderBorderSize,
+		sliderBorderStyle
 	} = attributes;
 	useEffect(() => {
 		const apiUrl = `https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDk4pe9MNGVrt3llulmdlfNWaQxzCc_b88`;
@@ -51,9 +56,15 @@ const Content = ({ attributes, setAttributes }) => {
 				console.error("Error fetching fonts:", error);
 			});
 	}, []);
+	const handleToggleChange = (key) => {
+        setAttributes({ [key]: !attributes[key] });
+    };
 
 	return (
-		<div>
+		<div style={{paddingTop: sliderPadding?.top,
+			paddingRight: sliderPadding?.right,
+			paddingBottom: sliderPadding?.bottom,
+			paddingLeft: sliderPadding?.left,}}>
 			<PanelBody title={__("Content Controls")} icon="edit">
 				<RangeControl
 					label={__("Content Size")}
@@ -251,7 +262,38 @@ const Content = ({ attributes, setAttributes }) => {
                             max={50}
                         />
                       
-                </PanelBody>
+            </PanelBody>
+			<PanelBody title={__("Slide Controls")} icon="format-image">
+    <ToggleControl
+        label={__("Slide Border")}
+        checked={sliderBorder}
+        onChange={() => handleToggleChange("sliderBorder")}
+    />
+
+        <RangeControl
+            label={__("Border Size")}
+            value={sliderBorderSize}
+            onChange={(value) =>
+                setAttributes({ sliderBorderSize: value })
+            }
+            min={1}
+            max={10} // Adjust the maximum value as per your requirement
+        />
+		<SelectControl
+		label={__("Border Style")}
+		value={sliderBorderStyle}
+		onChange={(value) =>
+			setAttributes({ sliderBorderStyle: value })
+		}
+		options={[
+			{ label: "Solid", value: "solid" },
+			{ label: "Dotted", value: "dotted" },
+			{ label: "Dashed", value: "dashed" },
+			// Add more border styles as needed
+		]}
+	/>
+
+</PanelBody>
 		</div>
 	);
 };

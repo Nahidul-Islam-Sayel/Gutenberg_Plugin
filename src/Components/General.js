@@ -5,7 +5,10 @@ import {
     PanelBody,
     ToggleControl,
     MenuGroup,
-    ButtonGroup
+    ButtonGroup,
+    __experimentalDivider as Divider,
+    __experimentalBoxControl as BoxControl,
+    
 } from "@wordpress/components";
 import {
 	MediaUpload
@@ -13,9 +16,9 @@ import {
 import { useState } from "@wordpress/element";
 
 const General = ({ attributes, setAttributes, slide }) => {
-    const { slides, align, editablePrefix, editableTitle, editableDescription, tabHeadingTagName } = attributes;
+    const { slides, align, editablePrefix, editableTitle, editableDescription, tabHeadingTagName, sliderPadding, sliderBorder } = attributes;
     const [selectedImage, setSelectedImage] = useState("");
-
+  
     const handleTextAlignmentChange = (alignment) => {
         setAttributes({ move: alignment });
     };
@@ -40,7 +43,7 @@ const General = ({ attributes, setAttributes, slide }) => {
 		});
 		setAttributes({ slides: updatedSlides });
 	};
-
+console.log(sliderBorder)
     return (
         <div>
            <PanelBody title={__("Image/Icon")} icon="format-image">
@@ -119,6 +122,16 @@ const General = ({ attributes, setAttributes, slide }) => {
                         ))}
                     </ButtonGroup>
                 </MenuGroup>
+              
+                {/* <BoxControl
+                    label={__('Slider Padding', 'easy-slider')}
+                    values={sliderPadding}
+                    onChange={(nextValues) => {
+                        setAttributes({ sliderPadding: nextValues });
+                    }}
+                /> */}
+   <Divider/>
+ 
             </PanelBody>
         </div>
     );

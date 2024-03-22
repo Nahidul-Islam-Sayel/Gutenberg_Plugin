@@ -151,7 +151,28 @@
 		"imageBorderRadius": {
 			"type": "number",
 			"default": 0
+		},
+		"sliderPadding": {
+			"type": "number",
+			"default": 0
+		},
+		"sliderBorder":{
+			"type": "object",
+			"default": false
+		},
+		"sliderBorderRadius":{
+			"type": "number",
+			"default": 0
+		},
+		"sliderBorderSize":{
+			"type": "number",
+			"default": 2
+		},
+		"sliderBorderStyle":{
+			"type": "string",
+			"default": "solid"
 		}
+
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

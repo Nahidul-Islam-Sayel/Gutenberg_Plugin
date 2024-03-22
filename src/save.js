@@ -26,17 +26,21 @@ export default function save({ attributes }) {
 		TitletextDecoration,
 		TitlefontCategory,
 		responsiveConditions,
-		imageBorderRadius
+		imageBorderRadius,
+		sliderBorder,
+		sliderBorderStyle,
+		sliderBorderSize
 	} = attributes;
 
 	const isHiddenDesktop = responsiveConditions.desktop ? 'hidden-desktop' : '';
 	const isHiddenTablet = responsiveConditions.tablet ? 'hidden-tablet' : '';
 	const isHiddenMobile = responsiveConditions.mobile ? 'hidden-mobile' : '';
-
+	const slideBorder= sliderBorder ? 'sliderBorder' : '' ;
 
 	return (
 		<div {...useBlockProps.save()}>
-			<div className={`${isHiddenDesktop} ${isHiddenTablet} ${isHiddenMobile}`}>
+			<div className={`${isHiddenDesktop} ${isHiddenTablet} ${isHiddenMobile} ${slideBorder}`} style={{borderStyle: sliderBorderStyle, 
+        borderWidth: `${sliderBorderSize}px`,}}>
 			<div className={`slider-container`}>
 				<div className="slides">
 					{slides.map((slide, index) => (
@@ -66,7 +70,7 @@ export default function save({ attributes }) {
 								tagName={tabHeadingTagName} // Default to 'h2' if tabHeadingTagName is not provided
 								value={slide.title}
 								style={{
-									fontSize: `${titleSize}px`,
+									
 										color: titleColor,
 										
 										textAlign: move,

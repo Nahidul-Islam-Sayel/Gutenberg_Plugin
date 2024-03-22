@@ -142,4 +142,24 @@
   margin-bottom: 20px;
 }
 
+.sliderBorder {
+  border: 2px solid black;
+}
+
+@media (max-width: 576px) {
+  .hidden-mobile {
+    display: none;
+  }
+}
+@media (min-width: 577px) and (max-width: 992px) {
+  .hidden-tablet {
+    display: none;
+  }
+}
+@media (min-width: 993px) {
+  .hidden-desktop {
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=index.css.map*/

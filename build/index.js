@@ -122,7 +122,9 @@ const General = ({
     editablePrefix,
     editableTitle,
     editableDescription,
-    tabHeadingTagName
+    tabHeadingTagName,
+    sliderPadding,
+    sliderBorder
   } = attributes;
   const [selectedImage, setSelectedImage] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)("");
   const handleTextAlignmentChange = alignment => {
@@ -158,6 +160,7 @@ const General = ({
       slides: updatedSlides
     });
   };
+  console.log(sliderBorder);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image/Icon"),
     icon: "format-image"
@@ -216,7 +219,7 @@ const General = ({
     onClick: () => setAttributes({
       tabHeadingTagName: tag
     })
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(tag)))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(tag))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalDivider, null)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (General);
 
@@ -266,7 +269,11 @@ const Content = ({
     TitlefontVisualStyle,
     TitletextDecoration,
     TitlefontCategory,
-    imageBorderRadius
+    imageBorderRadius,
+    sliderPadding,
+    sliderBorder,
+    sliderBorderSize,
+    sliderBorderStyle
   } = attributes;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
     const apiUrl = `https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDk4pe9MNGVrt3llulmdlfNWaQxzCc_b88`;
@@ -283,7 +290,19 @@ const Content = ({
       console.error("Error fetching fonts:", error);
     });
   }, []);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+  const handleToggleChange = key => {
+    setAttributes({
+      [key]: !attributes[key]
+    });
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      paddingTop: sliderPadding?.top,
+      paddingRight: sliderPadding?.right,
+      paddingBottom: sliderPadding?.bottom,
+      paddingLeft: sliderPadding?.left
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Content Controls"),
     icon: "edit"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
@@ -462,6 +481,39 @@ const Content = ({
     }),
     min: 0,
     max: 50
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Slide Controls"),
+    icon: "format-image"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Slide Border"),
+    checked: sliderBorder,
+    onChange: () => handleToggleChange("sliderBorder")
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Border Size"),
+    value: sliderBorderSize,
+    onChange: value => setAttributes({
+      sliderBorderSize: value
+    }),
+    min: 1,
+    max: 10 // Adjust the maximum value as per your requirement
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Border Style"),
+    value: sliderBorderStyle,
+    onChange: value => setAttributes({
+      sliderBorderStyle: value
+    }),
+    options: [{
+      label: "Solid",
+      value: "solid"
+    }, {
+      label: "Dotted",
+      value: "dotted"
+    }, {
+      label: "Dashed",
+      value: "dashed"
+    }
+    // Add more border styles as needed
+    ]
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Content);
@@ -531,7 +583,12 @@ function Edit({
     TitlefontVisualStyle,
     TitletextDecoration,
     TitlefontCategory,
-    imageBorderRadius
+    imageBorderRadius,
+    sliderPadding,
+    sliderBorder,
+    responsiveConditions,
+    sliderBorderSize,
+    sliderBorderStyle
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
@@ -604,6 +661,11 @@ function Edit({
       slides: updatedSlides
     });
   };
+  console.log(sliderPadding);
+  const slideBorder = sliderBorder ? 'sliderBorder' : '';
+  const isHiddenDesktop = responsiveConditions.desktop ? 'hidden-desktop' : '';
+  const isHiddenTablet = responsiveConditions.tablet ? 'hidden-tablet' : '';
+  const isHiddenMobile = responsiveConditions.mobile ? 'hidden-mobile' : '';
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Toolbar, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
@@ -648,7 +710,17 @@ function Edit({
     attributes: attributes,
     setAttributes: setAttributes
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "slider-container"
+    style: {
+      paddingTop: sliderPadding?.top,
+      paddingRight: sliderPadding?.right,
+      paddingBottom: sliderPadding?.bottom,
+      paddingLeft: sliderPadding?.left,
+      borderStyle: sliderBorderStyle,
+      borderWidth: `${sliderBorderSize}px`
+    },
+    className: `${slideBorder} ${isHiddenDesktop} ${isHiddenTablet} ${isHiddenMobile} ${slideBorder}`
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `slider-container`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "slides",
     style: {
@@ -722,7 +794,7 @@ function Edit({
   }, "<"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     className: "next-button",
     onClick: nextSlide
-  }, ">")));
+  }, ">"))));
 }
 
 /***/ }),
@@ -796,15 +868,23 @@ function save({
     TitletextDecoration,
     TitlefontCategory,
     responsiveConditions,
-    imageBorderRadius
+    imageBorderRadius,
+    sliderBorder,
+    sliderBorderStyle,
+    sliderBorderSize
   } = attributes;
   const isHiddenDesktop = responsiveConditions.desktop ? 'hidden-desktop' : '';
   const isHiddenTablet = responsiveConditions.tablet ? 'hidden-tablet' : '';
   const isHiddenMobile = responsiveConditions.mobile ? 'hidden-mobile' : '';
+  const slideBorder = sliderBorder ? 'sliderBorder' : '';
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${isHiddenDesktop} ${isHiddenTablet} ${isHiddenMobile}`
+    className: `${isHiddenDesktop} ${isHiddenTablet} ${isHiddenMobile} ${slideBorder}`,
+    style: {
+      borderStyle: sliderBorderStyle,
+      borderWidth: `${sliderBorderSize}px`
+    }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `slider-container`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -832,7 +912,6 @@ function save({
     ,
     value: slide.title,
     style: {
-      fontSize: `${titleSize}px`,
       color: titleColor,
       textAlign: move,
       fontFamily: `${(titleFontFamily, TitlefontCategory)}`,
@@ -959,7 +1038,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/easy-slider","version":"0.1.0","title":"Easy Slider","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":true},"textdomain":"easy-slider","attributes":{"slides":{"type":"array","default":[{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"},{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"},{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"}]},"imageSize":{"type":"string","default":"medium"},"imageRadius":{"type":"number","default":0},"settingsPanelState":{"type":"string","default":"image"},"titleColor":{"type":"string","default":""},"titleSize":{"type":"number","default":24},"titleStyle":{"type":"string","default":"normal"},"move":{"type":"string","default":"center"},"editablePrefix":{"type":"boolean","default":false},"editableTitle":{"type":"boolean","default":true},"editableDescription":{"type":"boolean","default":true},"tabHeadingTagName":{"type":"string","default":"h2"},"currentSlideIndex":{"type":"number","default":0},"contentFontFamily":{"type":"string","default":""},"fontCategory":{"type":"string","default":""},"fontVisualStyle":{"type":"string","default":"default"},"fontWidth":{"type":"string","default":"400"},"fontVariants":{"type":"array","default":[{"label":"400","value":"400","id":1},{"label":"600","value":"600","id":2}]},"ContenttextDecoration":{"type":"string","default":"none"},"fontSize":{"type":"number","default":"17"},"titleFontFamily":{"type":"string","default":""},"TitlefontVisualStyle":{"type":"string","default":"default"},"TitletextDecoration":{"type":"string","default":"none"},"TitlefontCategory":{"type":"string","default":""},"responsiveConditions":{"type":"object","default":{"desktop":false,"tablet":false,"mobile":false}},"imageBorderRadius":{"type":"number","default":0}},"editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/easy-slider","version":"0.1.0","title":"Easy Slider","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":true},"textdomain":"easy-slider","attributes":{"slides":{"type":"array","default":[{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"},{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"},{"title":"New Slide","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries","imageUrl":"","prefix":"Image 1"}]},"imageSize":{"type":"string","default":"medium"},"imageRadius":{"type":"number","default":0},"settingsPanelState":{"type":"string","default":"image"},"titleColor":{"type":"string","default":""},"titleSize":{"type":"number","default":24},"titleStyle":{"type":"string","default":"normal"},"move":{"type":"string","default":"center"},"editablePrefix":{"type":"boolean","default":false},"editableTitle":{"type":"boolean","default":true},"editableDescription":{"type":"boolean","default":true},"tabHeadingTagName":{"type":"string","default":"h2"},"currentSlideIndex":{"type":"number","default":0},"contentFontFamily":{"type":"string","default":""},"fontCategory":{"type":"string","default":""},"fontVisualStyle":{"type":"string","default":"default"},"fontWidth":{"type":"string","default":"400"},"fontVariants":{"type":"array","default":[{"label":"400","value":"400","id":1},{"label":"600","value":"600","id":2}]},"ContenttextDecoration":{"type":"string","default":"none"},"fontSize":{"type":"number","default":"17"},"titleFontFamily":{"type":"string","default":""},"TitlefontVisualStyle":{"type":"string","default":"default"},"TitletextDecoration":{"type":"string","default":"none"},"TitlefontCategory":{"type":"string","default":""},"responsiveConditions":{"type":"object","default":{"desktop":false,"tablet":false,"mobile":false}},"imageBorderRadius":{"type":"number","default":0},"sliderPadding":{"type":"number","default":0},"sliderBorder":{"type":"object","default":false},"sliderBorderRadius":{"type":"number","default":0},"sliderBorderSize":{"type":"number","default":2},"sliderBorderStyle":{"type":"string","default":"solid"}},"editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

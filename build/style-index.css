@@ -109,5 +109,8 @@
     display: none;
   }
 }
+.sliderBorder {
+  border: 2px solid black;
+}
 
 /*# sourceMappingURL=style-index.css.map*/

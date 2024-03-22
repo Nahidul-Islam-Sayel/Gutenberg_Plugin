@@ -19,8 +19,6 @@ jQuery(document).ready(function($) {
 
     $('.next-button').on('click', nextSlide);
     $('.prev-button').on('click', prevSlide);
-
-    // Automatically change slide every 5 seconds
     setInterval(function() {
         nextSlide();
     }, 5000);
@@ -32,7 +30,7 @@ jQuery(document).ready(function($) {
     });
 
     function updatePagination(index) {
-        $('.dot-xyz').removeClass('active'); // Remove active class from all dots
-        $('.dot-xyz').eq(index).addClass('active'); // Add active class to the current dot
+        $('.dot-xyz').removeClass('active');
+        $('.dot-xyz').eq(index).addClass('active'); 
     }
 });

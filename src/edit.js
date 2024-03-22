@@ -47,7 +47,12 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 		TitlefontVisualStyle,
 		TitletextDecoration,
 		TitlefontCategory,
-		imageBorderRadius
+		imageBorderRadius,
+		sliderPadding,
+		sliderBorder,
+		responsiveConditions,
+		sliderBorderSize,
+		sliderBorderStyle
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -127,6 +132,11 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 		});
 		setAttributes({ slides: updatedSlides });
 	};
+	console.log(sliderPadding)
+	const slideBorder= sliderBorder ? 'sliderBorder' : '' ;
+	const isHiddenDesktop = responsiveConditions.desktop ? 'hidden-desktop' : '';
+	const isHiddenTablet = responsiveConditions.tablet ? 'hidden-tablet' : '';
+	const isHiddenMobile = responsiveConditions.mobile ? 'hidden-mobile' : '';
 	return (
 		<div {...blockProps}>
 			<BlockControls>
@@ -180,12 +190,20 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 					)}
 				</PanelBody>
 			</InspectorControls>
-			<div className="slider-container">
+			<div style={{paddingTop: sliderPadding?.top,
+						paddingRight: sliderPadding?.right,
+						paddingBottom: sliderPadding?.bottom,
+						paddingLeft: sliderPadding?.left,
+						borderStyle: sliderBorderStyle, 
+        borderWidth: `${sliderBorderSize}px`, 
+						}} className={`${slideBorder} ${isHiddenDesktop} ${isHiddenTablet} ${isHiddenMobile} ${slideBorder}`}>
+			<div className={`slider-container`} >
 				<div
 					className="slides"
 					style={{
 						transform: `translateX(-${currentSlide * 100}%)`,
 						transition: isEditing ? "none" : "transform 0.5s ease-in-out",
+						
 					}}
 				>
 					{slides.map((slide, index) => (
@@ -281,6 +299,7 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 					&gt;
 				</button>
 			</div>
+		  </div>
 		</div>
 	);
 }
